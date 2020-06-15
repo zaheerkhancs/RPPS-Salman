@@ -1,0 +1,13 @@
+D:\Solution Code\RightPathSchool\bin\Debug\RightPathSchool.exe.config
+D:\Solution Code\RightPathSchool\bin\Debug\RightPathSchool.exe
+D:\Solution Code\RightPathSchool\bin\Debug\RightPathSchool.pdb
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.csprojAssemblyReference.cache
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.Properties.Resources.resources
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.csproj.GenerateResource.cache
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.csproj.CoreCompileInputs.cache
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.exe
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.pdb
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.Forms.login.resources
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.MdiParent.resources
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.Forms.NewStudentEnrollment.resources
+D:\Solution Code\RightPathSchool\obj\Debug\RightPathSchool.Forms.FeeCard.resources
