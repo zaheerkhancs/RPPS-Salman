@@ -97,7 +97,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnclose;
-            this.ClientSize = new System.Drawing.Size(341, 129);
+            this.ClientSize = new System.Drawing.Size(337, 125);
             this.ControlBox = false;
             this.Controls.Add(this.btnclose);
             this.Controls.Add(this.btnlogin);
@@ -114,6 +114,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login Screen";
+            this.Load += new System.EventHandler(this.login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

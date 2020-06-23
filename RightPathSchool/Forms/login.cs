@@ -63,6 +63,11 @@ namespace RightPathSchool.Forms
             sqlcon.Close();
        
         }
+
+        private void login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }

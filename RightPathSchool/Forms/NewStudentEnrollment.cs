@@ -27,9 +27,65 @@ namespace RightPathSchool.Forms
         {
 
         }
+        public void GetCLass()
+        {
+            try
+            {
+                var dt = new DataTable();
+                var Qry = "Select ClassID, ClassName from ClassDetails Where Active=1";
+                var sqlCon = new SqlConnection(UniCon);
+                var da = new SqlDataAdapter(Qry, sqlCon);
+                da.Fill(dt);
+                this.cmbClassSought.ValueMember = dt.Columns["ClassID"].ToString();
+                this.cmbClassSought.DisplayMember = dt.Columns["ClassName"].ToString();
+                cmbClassSought.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error" + ex.Message.ToString());
+            }
+            finally
+            {
 
+
+            }
+
+        }
+        public void GetSession()
+        {
+            try
+            {
+                var Qry = "Select SessionID, SessionDetail from Session Where CurrentSession=1 and Active=1";
+                var sqlCon = new SqlConnection(UniCon);
+                if (sqlCon.State != ConnectionState.Open)
+                {
+                    sqlCon.Open();
+                    var sqlcom = new SqlCommand(Qry, sqlCon);
+                    sqlcom.CommandText = Qry;
+                    SqlDataReader reader = sqlcom.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        this.cmbSession.Items.Add(reader["SessionDetail"].ToString());
+                        this.cmbSession.ValueMember = reader["SessionID"].ToString();
+                        this.cmbSession.DisplayMember = reader["SessionDetail"].ToString();
+                    }
+                    sqlCon.Close();
+                    reader.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error" + ex.Message.ToString());
+            }
+            finally
+            {
+
+            }
+        }
         private void NewStudentEnrollment_Load(object sender, EventArgs e)
         {
+            GetCLass();
+            GetSession();
             cmbSession.SelectedIndex = 0;
             cmbAddmissionYear.SelectedIndex = 0;
             cmbGender.SelectedIndex = 0;
@@ -79,7 +135,7 @@ namespace RightPathSchool.Forms
            ",[Guardian]" +
            ",[GuardianCellNo]" +
            ",[LastSchool]" +
-           ",[ClassSought]" +
+           ",[ClassSoughtID]" +
            ",[Medium]" +
            ",[Nationality]" +
            ",[Religion]" +
@@ -101,7 +157,7 @@ namespace RightPathSchool.Forms
            ",[ModifiedBy]" +
            ",[CreatedBy])" +
      "VALUES" +
-           "('" + cmbSession.SelectedItem.ToString() + "'" +
+           "('" + cmbSession.ValueMember.ToString() + "'" +
            ",'" + cmbAddmissionYear.SelectedItem.ToString() + "'" +
            ",'" + txtEnrollmentNo.Text.ToString().Trim() + "'" +
            ",'" + txtPreviousAddmisionNo.Text.Trim().ToString() + "'" +
@@ -117,7 +173,7 @@ namespace RightPathSchool.Forms
            ",'" + txtGuardianName.Text.ToString() + "'" +
            ",'" + txtGuardianCellNo.Text.ToString() + "'" +
            ",'" + txtLastAttendSchool.Text.ToString() + "'" +
-           ",'" + cmbClassSought.SelectedItem.ToString() + "'" +
+           ",'" + cmbClassSought.SelectedValue.ToString() + "'" +
            ",'" + cmbMediumSchool.SelectedItem.ToString() + "'" +
            ",'" + txtNationality.Text.ToString() + "'" +
            ",'" + cmbReligion.SelectedItem.ToString() + "'" +
@@ -150,6 +206,37 @@ namespace RightPathSchool.Forms
                 sqlcon.Close();
                 try
                 {
+                    var QryCurrentEn = "INSERT INTO [dbo].[CurrentEnrStudentRec] " +
+       "([StudentID]" +
+       ",[SessionID]" +
+       ",[AdmissionNo]" +
+       ",[StudentName]" +
+       ",[FatherName]" +
+       ",[EnrolledClassID]" +
+       ",[ActiveStatus])" +
+ "VALUES" +
+       "(" +
+       "'" + IDentity + "'" +
+       ", '" + cmbSession.ValueMember + "'" +
+       ", '" + txtEnrollmentNo.Text + "'" +
+       ", '" + txtaName.Text + "'" +
+       ", '" + txtFName.Text.ToString() + "' " +
+       ", '" + cmbClassSought.SelectedValue.ToString() + "'" +
+       ", '" + cmbCurrentStatus.SelectedItem.ToString() + "') ";
+                    var sqlcomEn = new SqlCommand(QryCurrentEn, sqlcon);
+                    sqlcon.Open();
+                    sqlcomEn.ExecuteNonQuery();
+                    sqlcon.Close();
+                    sqlcomEn.Dispose();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
+                try
+                {                   
                     if (OfileName != null) {
                         File.Copy(OfileName, @"D:\\Solution Code\\RightPathSchool\\res\\StudentProfiles\\" + IDentity + ".jpg");
                         sqlcon.Open();
@@ -184,7 +271,7 @@ namespace RightPathSchool.Forms
                     String StudentID = gGridView.SelectedRows[0].Cells[0].Value + string.Empty;
                     txtStudentIdentity.Text = StudentID;
                     String SessionID = gGridView.SelectedRows[0].Cells[1].Value + string.Empty;
-                    cmbSession.SelectedItem = SessionID.ToString();
+                    cmbSession.ValueMember = SessionID.ToString();
                     String AdmissionYear = gGridView.SelectedRows[0].Cells[2].Value + string.Empty;
                     cmbAddmissionYear.SelectedItem = AdmissionYear;
                     String StudenEnrollmentNo = gGridView.SelectedRows[0].Cells[3].Value + string.Empty;
@@ -215,8 +302,8 @@ namespace RightPathSchool.Forms
                     txtGuardianCellNo.Text = GuardianCellNo;
                     String LastSchool = gGridView.SelectedRows[0].Cells[16].Value + string.Empty;
                     txtLastAttendSchool.Text = LastSchool;
-                    String ClassSought = gGridView.SelectedRows[0].Cells[17].Value + string.Empty;
-                    cmbClassSought.SelectedItem = ClassSought;
+                    String ClassSoughtID = gGridView.SelectedRows[0].Cells[17].Value + string.Empty;
+                    cmbClassSought.ValueMember = Convert.ToInt32(ClassSoughtID).ToString();
                     String Medium = gGridView.SelectedRows[0].Cells[18].Value + string.Empty;
                     cmbMediumSchool.SelectedItem = Medium;
                     String Nationality = gGridView.SelectedRows[0].Cells[19].Value + string.Empty;
@@ -293,7 +380,7 @@ namespace RightPathSchool.Forms
         {
             var Qry = " UPDATE[dbo].[StudentEnrollment]" +
                       " SET[SessionID] = '" + cmbSession.SelectedItem + "'"
-                          + ",[AdmissionYear] = '" + cmbAddmissionYear.SelectedItem.ToString() + "'"
+                          + ",[AdmissionYear] = '" + cmbAddmissionYear.ValueMember.ToString() + "'"
                            + ",[StudenEnrollmentNo] = '" + txtEnrollmentNo.Text.ToString().Trim() + "'"
                           + ",[PrevAdwNo] = '" + txtPreviousAddmisionNo.Text.Trim().ToString() + "'"
                           + ",[NameEn] = '" + txtaName.Text.ToString().Trim() + "'"
@@ -308,7 +395,7 @@ namespace RightPathSchool.Forms
                           + ",[Guardian] = '" + txtGuardianName.Text.ToString() + "'"
                           + ",[GuardianCellNo] ='" + txtGuardianCellNo.Text.ToString() + "'"
                           + ",[LastSchool] = '" + txtLastAttendSchool.Text.ToString() + "'"
-                          + ",[ClassSought] = '" + cmbClassSought.SelectedItem.ToString() + "'"
+                          + ",[ClassSoughtID] = '" + cmbClassSought.SelectedValue.ToString() + "'"
                           + ",[Medium] = '" + cmbMediumSchool.SelectedItem.ToString() + "'"
                           + ",[Nationality] ='" + txtNationality.Text.ToString() + "'"
                           + ",[Religion] = '" + cmbReligion.SelectedItem.ToString() + "'"

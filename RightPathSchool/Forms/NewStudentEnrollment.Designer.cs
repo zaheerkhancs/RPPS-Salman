@@ -99,20 +99,22 @@
             this.cmbCurrentStatus = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.PictureBoxBarcode = new System.Windows.Forms.PictureBox();
             this.txtStudentIdentity = new System.Windows.Forms.TextBox();
-            this.lblPicturePath = new System.Windows.Forms.Label();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblPicturePath = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxBarcode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 13);
+            this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 0;
@@ -140,14 +142,6 @@
             // 
             this.cmbSession.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSession.FormattingEnabled = true;
-            this.cmbSession.Items.AddRange(new object[] {
-            "2020-2021",
-            "2019-2020",
-            "2018-2019",
-            "2017-2018",
-            "2016-2017",
-            "2015-2016",
-            ""});
             this.cmbSession.Location = new System.Drawing.Point(56, 7);
             this.cmbSession.Name = "cmbSession";
             this.cmbSession.Size = new System.Drawing.Size(121, 21);
@@ -448,20 +442,8 @@
             // 
             this.cmbClassSought.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbClassSought.FormattingEnabled = true;
-            this.cmbClassSought.Items.AddRange(new object[] {
-            "Prep",
-            "KG",
-            "Class-1",
-            "Class-2",
-            "Class-3",
-            "Class-4",
-            "Class-5",
-            "Class-6",
-            "Class-7",
-            "Class-8",
-            "Class-9",
-            "Class-10"});
             this.cmbClassSought.Location = new System.Drawing.Point(327, 159);
+            this.cmbClassSought.MaxDropDownItems = 10;
             this.cmbClassSought.Name = "cmbClassSought";
             this.cmbClassSought.Size = new System.Drawing.Size(121, 21);
             this.cmbClassSought.TabIndex = 18;
@@ -799,23 +781,42 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.PictureBoxBarcode);
             this.groupBox2.Controls.Add(this.txtStudentIdentity);
             this.groupBox2.Controls.Add(this.PictureBox1);
             this.groupBox2.Location = new System.Drawing.Point(819, 46);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 234);
+            this.groupBox2.Size = new System.Drawing.Size(223, 234);
             this.groupBox2.TabIndex = 66;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Student Profile Picture";
             // 
+            // PictureBoxBarcode
+            // 
+            this.PictureBoxBarcode.Location = new System.Drawing.Point(49, 147);
+            this.PictureBoxBarcode.Name = "PictureBoxBarcode";
+            this.PictureBoxBarcode.Size = new System.Drawing.Size(97, 66);
+            this.PictureBoxBarcode.TabIndex = 68;
+            this.PictureBoxBarcode.TabStop = false;
+            // 
             // txtStudentIdentity
             // 
             this.txtStudentIdentity.Enabled = false;
-            this.txtStudentIdentity.Location = new System.Drawing.Point(42, 24);
+            this.txtStudentIdentity.Location = new System.Drawing.Point(49, 24);
             this.txtStudentIdentity.Name = "txtStudentIdentity";
-            this.txtStudentIdentity.Size = new System.Drawing.Size(121, 20);
+            this.txtStudentIdentity.Size = new System.Drawing.Size(97, 20);
             this.txtStudentIdentity.TabIndex = 67;
             this.txtStudentIdentity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // PictureBox1
+            // 
+            this.PictureBox1.Location = new System.Drawing.Point(49, 52);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(97, 84);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBox1.TabIndex = 0;
+            this.PictureBox1.TabStop = false;
+            this.PictureBox1.Click += new System.EventHandler(this.StudentPicture_Click);
             // 
             // lblPicturePath
             // 
@@ -826,15 +827,6 @@
             this.lblPicturePath.TabIndex = 67;
             this.lblPicturePath.Text = "label32";
             this.lblPicturePath.Visible = false;
-            // 
-            // PictureBox1
-            // 
-            this.PictureBox1.Location = new System.Drawing.Point(31, 52);
-            this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(146, 157);
-            this.PictureBox1.TabIndex = 0;
-            this.PictureBox1.TabStop = false;
-            this.PictureBox1.Click += new System.EventHandler(this.StudentPicture_Click);
             // 
             // btnDelete
             // 
@@ -925,6 +917,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gGridView)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxBarcode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1008,5 +1001,6 @@
         private System.Windows.Forms.TextBox txtStudentIdentity;
         private System.Windows.Forms.Label lblPicturePath;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.PictureBox PictureBoxBarcode;
     }
 }

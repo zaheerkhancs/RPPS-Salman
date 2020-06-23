@@ -41,5 +41,33 @@ namespace RightPathSchool
         {
 
         }
+
+        private void attandancePostingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var post_dt = new Forms.GetAttandanceManual();
+            post_dt.MdiParent = this;
+            post_dt.Show();
+        }
+
+        private void studentBarCodeGeneratorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var post_dt = new Forms.StudentBarCodeGenerator();
+            post_dt.MdiParent = this;
+            post_dt.Show();
+        }
+
+        private void testFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var post_dt = new Forms.TestForm();
+            post_dt.MdiParent = this;
+            post_dt.Show();
+        }
+
+        private void createLoginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var post_dt = new Forms.CreateLogin();
+            post_dt.MdiParent = this;
+            post_dt.Show();
+        }
     }
 }
